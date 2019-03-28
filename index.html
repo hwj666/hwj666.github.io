@@ -229,6 +229,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/windows右键关联程序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/28/windows右键关联程序/" itemprop="url">windows右键关联程序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T13:43:42+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>发现了一个好用的cmd，叫(cmder)[<a href="https://cmder.net/],可以将cmder添加到path中，这样可以直接通过win+r来进行调用，但是有时候想要在某个文件夹内打开cmder，可以通过逐步切换路径实现，但是很不方便，因此可以使用右键关联程序，直接调出。" target="_blank" rel="noopener">https://cmder.net/],可以将cmder添加到path中，这样可以直接通过win+r来进行调用，但是有时候想要在某个文件夹内打开cmder，可以通过逐步切换路径实现，但是很不方便，因此可以使用右键关联程序，直接调出。</a></p>
+<ol>
+<li><p>win+r调出运行框，输入regedit</p>
+</li>
+<li><p>寻找路径  HKEY_CLASSES_ROOT\Directory\Background\shell，可以看到这里有几个小文件夹，都是我们右键调出的命令。现在添加在自己想要的程序。</p>
+</li>
+<li><p>在shell上右键，新建项，起一个名字，这里我是要关联cmder，因此起了一个terminal的名字，然后右键terminal再新建一个项，叫command（这个名字不要改），右侧应该就会出现一个默认的东西，右键点击选择修改，将关联的exe程序的路径添加进去。</p>
+</li>
+<li><p>在terminal上右键添加字符串，改名为Icon，然后右键Icon，将值填为想要的图标，关掉。随便找个地方右键试试。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/ssh免密登陆/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -574,7 +704,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
