@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="首先安装各种依赖，依赖可以到源文件的BUILD.TXT查看  Requirements:  Unix System JDK 1.8 Maven 3.3 or later ProtocolBuffer 2.5.0 CMake 3.1 or newer (if compiling native code) Zlib devel (if compiling native code) openssl de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="raspberry编译hadoop">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/raspberry编译hadoop2.9.2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先安装各种依赖，依赖可以到源文件的BUILD.TXT查看  Requirements:  Unix System JDK 1.8 Maven 3.3 or later ProtocolBuffer 2.5.0 CMake 3.1 or newer (if compiling native code) Zlib devel (if compiling native code) openssl de">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-28T04:29:35.205Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="raspberry编译hadoop">
+<meta name="twitter:description" content="首先安装各种依赖，依赖可以到源文件的BUILD.TXT查看  Requirements:  Unix System JDK 1.8 Maven 3.3 or later ProtocolBuffer 2.5.0 CMake 3.1 or newer (if compiling native code) Zlib devel (if compiling native code) openssl de">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/28/raspberry编译hadoop2.9.2/">
+
+
+
+
+
+  <title>raspberry编译hadoop | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/raspberry编译hadoop2.9.2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">raspberry编译hadoop</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T12:27:31+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先安装各种依赖，依赖可以到源文件的BUILD.TXT查看</p>
+<blockquote>
+<p>Requirements:</p>
+<ul>
+<li>Unix System</li>
+<li>JDK 1.8</li>
+<li>Maven 3.3 or later</li>
+<li>ProtocolBuffer 2.5.0</li>
+<li>CMake 3.1 or newer (if compiling native code)</li>
+<li>Zlib devel (if compiling native code)</li>
+<li>openssl devel (if compiling native hadoop-pipes and to get the best HDFS encryption performance)</li>
+<li>Linux FUSE (Filesystem in Userspace) version 2.6 or above (if compiling fuse_dfs)</li>
+<li>Internet connection for first build (to fetch all Maven and Hadoop dependencies)</li>
+<li>python (for releasedocs)</li>
+<li>bats (for shell code testing)</li>
+<li>Node.js / bower / Ember-cli (for YARN UI v2 building)</li>
+</ul>
+</blockquote>
+<p>具体的安装有</p>
+<blockquote>
+<ul>
+<li>Native libraries</li>
+<li>sudo apt-get -y install build-essential autoconf automake libtool cmake zlib1g-dev pkg-config libssl1.0-dev</li>
+</ul>
+</blockquote>
+<p>需要手动安装的有几个软件</p>
+<h2 id="ORCALE-JDK1-8"><a href="#ORCALE-JDK1-8" class="headerlink" title="ORCALE JDK1.8"></a>ORCALE JDK1.8</h2><p>jdk最好安装的是oracle的，Hadoop的BULID.TXT中有说明。首先下载jdk1.8，我的树莓派装的是64为的系统，因此下载64位的arm版jdk，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-arm64-vfp-hflt.tar.gz?AuthParam=1548313898_aef98c498141bf55d87e728e95d54cf3</span><br></pre></td></tr></table></figure></p>
+<p>下载下来为<code>jdk-8u202-linux-arm64-vfp-hflt.tar.gz?AuthParam=1548313898_aef98c498141bf55d87e728e95d54cf3</code>，重命名为<code>jdk.tar.gz</code>，解压到<code>/usr/local/</code>中，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure></p>
+<p>编辑.bashrc文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk</span><br><span class="line">export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin</span><br></pre></td></tr></table></figure></p>
+<p>然后激活<code>source .bashrc</code></p>
+<h2 id="protobuf2-5-0"><a href="#protobuf2-5-0" class="headerlink" title="protobuf2.5.0"></a>protobuf2.5.0</h2><p>raspberry pi上可以直接通过apt命令安装protobuf的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install libprotobuf-dev protobuf-compiler</span><br></pre></td></tr></table></figure></p>
+<p>但是安装的protobuf版本为3.0.0，为了编译hadoop必须使用protobuf2.5.0版本才可以，因此需要自己编译。首先安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install autoconf automake libtool curl make g++ unzip</span><br></pre></td></tr></table></figure></p>
+<p>然后下载2.5.0版本的protobuf,protobuf已经迁移到<a href="https://github.com/protocolbuffers/protobuf/releases" target="_blank" rel="noopener">GitHub</a>，我们找到2.5.0版本进行下载解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/protocolbuffers/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz</span><br><span class="line">tar -zxf protobuf-2.5.0.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>不要下载source code，纯源码在编译时会自动下载gtest，国内下载不了。然后开始进入编译阶段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>make的时候就会报错，这是因为protobuf针对的是x86等架构的，raspberry是ARM64结构，因此无法成功编译。反正自己编译的时候会有错误提示，看看就明白了。因此需要对源码包进行一些修改<br>首先将<a href="https://github.com/protocolbuffers/protobuf/blob/v3.5.2/src/google/protobuf/stubs/atomicops_internals_arm64_gcc.h" target="_blank" rel="noopener">3.5.2</a>版本中的<code>atomicops_internals_arm64_gcc.h</code>文件拷贝到protobuf2.5.0的<code>src/google/protobuf/stubs/</code>路径下，然后在<code>/protobuf-2.5.0/src/google/protobuf/stubs/platform_macros.h</code>中添加几句分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#elif defined(__aarch64__)</span><br><span class="line">#define GOOGLE_PROTOBUF_ARCH_AARCH64 1</span><br><span class="line">#define GOOGLE_PROTOBUF_ARCH_64_BIT 1</span><br></pre></td></tr></table></figure></p>
+<p>打开<code>/protobuf-2.5.0/src/google/protobuf/stubs/atomicops.h</code>文件，在其中添加分支：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#elif defined(GOOGLE_PROTOBUF_ARCH_AARCH64)</span><br><span class="line">#include&lt;google/protobuf/stubs/atomicops_internals_arm64_gcc.h&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后我们重新编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make -j 4</span><br><span class="line">make check</span><br><span class="line">sudo make install</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure></p>
+<p>一切ok之后就可以测试一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --version</span><br></pre></td></tr></table></figure></p>
+<p>修改后的protot2.5.0我已经放在<a href="https://github.com/hwj666/raspberry_protobuf2.5.0" target="_blank" rel="noopener">GitHub</a>上了，可以直接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/hwj666/raspberry_protobuf2.5.0</span><br><span class="line">cd raspberry_protobuf2.5.0</span><br><span class="line">sudo sh autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make -j 4</span><br><span class="line">make check</span><br><span class="line">sudo make install</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure></p>
+<h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><p>首先下载<a href="http://maven.apache.org/" target="_blank" rel="noopener">maven</a>，要求下载3.3以后的版本，解压到<code>/usr/local</code>，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf 	apache-maven-3.6.0-bin.tar.gz -C /usr/local</span><br><span class="line">cd /usr/local</span><br><span class="line">sudo mv apache-maven-3.6.0 maven</span><br><span class="line">cd ~</span><br><span class="line">vim .bashrc</span><br></pre></td></tr></table></figure></p>
+<p>在末端添加路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/usr/local/maven</span><br><span class="line">export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">export PATH=$MAVEN_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></p>
+<p>然后激活一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .bashrc</span><br></pre></td></tr></table></figure></p>
+<p>查看一下版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure></p>
+<p>maven下载速度非常慢，修改为国内的阿里源，即编辑<code>conf/settings.xml</code>，在<code>&lt;mirrors&gt;&lt;/mirrors&gt;</code>中添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-public-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>public-snapshots<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/repositories/snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后感受飞一样的感觉。</p>
+<h2 id="ant"><a href="#ant" class="headerlink" title="ant"></a>ant</h2><p>下载<a href="http://ant.apache.org/" target="_blank" rel="noopener">ant</a>，其余与安装maven相同。</p>
+<h2 id="hadoop安装"><a href="#hadoop安装" class="headerlink" title="hadoop安装"></a>hadoop安装</h2><p>首先下载<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/core/" target="_blank" rel="noopener">hadoop</a>，这里下载的是2.9.2<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/core/hadoop-2.9.2/hadoop-2.9.2-src.tar.gz</span><br><span class="line">tar -zxvf hadoop-2.9.2-src.tar.gz -C ./</span><br><span class="line"><span class="built_in">cd</span> hadoop-2.9.2-src/hadoop-maven-plugins</span><br><span class="line">mvn install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">mvn compile -Pnative</span><br><span class="line">mvn package -Pdist,native -DskipTests -Dtar</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><a href="https://github.com/protocolbuffers/protobuf/blob/master/src/README.md" target="_blank" rel="noopener">protobuf Installation Instructions </a></p>
+<p><a href="https://blog.csdn.net/xiexievv/article/details/47396725" target="_blank" rel="noopener">linux下安装google protobuf（详细）</a></p>
+<p><a href="https://blog.csdn.net/lawest/article/details/80740966" target="_blank" rel="noopener">基于osg3.2.1 + osgearth2.6 国产银河麒麟三维系统移植</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/28/ssh免密登陆/" rel="prev" title="ssh免密登陆">
+                ssh免密登陆 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORCALE-JDK1-8"><span class="nav-number">1.</span> <span class="nav-text">ORCALE JDK1.8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protobuf2-5-0"><span class="nav-number">2.</span> <span class="nav-text">protobuf2.5.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-number">3.</span> <span class="nav-text">maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ant"><span class="nav-number">4.</span> <span class="nav-text">ant</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hadoop安装"><span class="nav-number">5.</span> <span class="nav-text">hadoop安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
