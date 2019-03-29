@@ -229,6 +229,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/scala定义函数的方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/29/scala定义函数的方式/" itemprop="url">scala定义函数的方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-29T16:06:06+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>标准格式的定义</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span></span>(name:<span class="type">String</span>):<span class="type">Unit</span> = &#123;</span><br><span class="line">    println(<span class="string">s"hello <span class="subst">$&#123;name&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span></span>(x:<span class="type">Int</span>):<span class="type">Int</span> = &#123;</span><br><span class="line">    x * x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>scala中不需要return就可以返回的</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">函数名</span></span>(参数列表):返回类型 = &#123;</span><br><span class="line">	<span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省去返回类型</p>
+<p>scala有类型推断的功能，因此可以省略返回类型让其自动推断</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span></span>(name:<span class="type">String</span>) = &#123;</span><br><span class="line">    println(<span class="string">s"hello <span class="subst">$&#123;name&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span></span>(x:<span class="type">Int</span>) = &#123;</span><br><span class="line">    x * x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>省略等号</p>
+<p>只有无返回值的函数才可以省略等号</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span></span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">	println(<span class="string">s"hello <span class="subst">$&#123;name&#125;</span>"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有返回类型的函数等号是不能忽略的，省略的话会报警告的</p>
+<blockquote>
+<p>warning: a pure expression does nothing in statement position</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span></span>(x:<span class="type">Int</span>) &#123;</span><br><span class="line">    x * x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为<code>()</code>，啥也不反回。这是因为省略了返回类型，编译器认为这个函数是没有返回值的，因此一方面返回为空，另一方面报函数体内有返回值的警告，<strong>建议函数都加上等号</strong></p>
+</li>
+<li><p>省略大括号</p>
+<p>函数内只有一行代码时可以直接省略大括号。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span></span>(name:<span class="type">String</span>) = println(<span class="string">s"hello <span class="subst">$&#123;name&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span></span>(x:<span class="type">Int</span>) =  x * x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数字面量（Lambda表达式，匿名函数）</p>
+<p>scala中一切都是对象，函数也不例外，因此可以将一个函数直接赋值给某个变量</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x:<span class="type">Int</span>) =&gt; x * x <span class="comment">//lambda表达式，复杂的可以加个花括号变为匿名函数</span></span><br></pre></td></tr></table></figure>
+<p>赋值给某个变量</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> power = (x:<span class="type">Int</span>) =&gt; x*x</span><br></pre></td></tr></table></figure>
+<p>直接调用<code>power(3)</code>即可。加入给定一个Araay，将每个元素平方得到一个新的数组，可以使用map</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr = (<span class="number">1</span> to <span class="number">10</span>).toArray</span><br><span class="line"><span class="keyword">val</span> pArr = arr.map((x:<span class="type">Int</span>)=&gt;x*x)</span><br></pre></td></tr></table></figure>
+<p>因为scala中的类型推断，可以省去形参的参数类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr = (<span class="number">1</span> to <span class="number">10</span>).toArray</span><br><span class="line"><span class="keyword">val</span> pArr = arr.map(x=&gt;x*x)</span><br></pre></td></tr></table></figure>
+<p>还有一种奇技淫巧用的很多，就是占位符。比如一个相加的函数</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(x:<span class="type">Int</span>,y:<span class="type">Int</span>):<span class="type">Int</span> = &#123;</span><br><span class="line">    x + y</span><br><span class="line">&#125;<span class="comment">//标准定义</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(x:<span class="type">Int</span>,y:<span class="type">Int</span>) = &#123;</span><br><span class="line">    x + y</span><br><span class="line">&#125;<span class="comment">//省略返回类型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(x:<span class="type">Int</span>,y:<span class="type">Int</span>) = x + y <span class="comment">//省略大括号</span></span><br><span class="line"></span><br><span class="line">(x:<span class="type">Int</span>,y:<span class="type">Int</span>) =&gt; x + y <span class="comment">//Lambda表达式</span></span><br></pre></td></tr></table></figure>
+<p>写成占位符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val add = (_:Int) + (_:Int)//分别表示两个参数</span><br></pre></td></tr></table></figure>
+<p>编译器会自动解析为lambda表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add: (Int, Int) =&gt; Int = $$Lambda$1108/2058316797@4a8bf1dc</span><br></pre></td></tr></table></figure>
+<p> 不过是两个不同的参数，如果是同一个参数我还不知道如何使用占位符。。。。，例如上面那个power</p>
+<p>占位符比较简洁，应用也很多，例如要去除一个数组中的小于5的元素</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> arr = (<span class="number">1</span> to <span class="number">10</span>).toArray</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span></span>(x:<span class="type">Int</span>) = x &gt; <span class="number">5</span></span><br><span class="line"><span class="keyword">val</span> parr = arr.filter(fun)</span><br><span class="line"><span class="keyword">val</span> parr = arr.filter((x:<span class="type">Int</span>) =&gt; x &gt; <span class="number">5</span>)</span><br><span class="line"><span class="keyword">val</span> parr = arr.filter(x =&gt; x&gt;<span class="number">5</span>)</span><br><span class="line"><span class="keyword">val</span> parr = arr.filter(_ &gt; <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>或者对一个数组进行排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val arr = Array(9,6,7,5,3,4,2,0,1)</span><br><span class="line">arr.sortWith((x,y) =&gt; x&gt;y)</span><br><span class="line">arr.sortWith(_ &gt; _)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/windows右键关联程序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,7 +869,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
