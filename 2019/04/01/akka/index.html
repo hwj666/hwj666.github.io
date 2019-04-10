@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="使用ssh登陆远程主机1ssh username@ip 每次登陆的时候都需要输入密码，如果是登陆集群的话输入那么多密码可能会累死，因此可以设置免密登陆。免密登陆的流程如图 ssh免密登陆服务器 首先在master上使用ssh-keygen-trsa命令生成公钥和私钥。1ssh-keygen-trsa   最终得到一个私钥id_rsa和一个公钥id_rsa.pub文件，记得看一下文件路径保存在哪里了">
+<meta name="description" content="导入akka使用sbt构建的项目会生成build.sbt文件，添加 123resolvers += &quot;Typesafe Repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;libraryDependencies += &quot;com.typesafe.akka&quot; % &quot;akka-actor_2.11&quot; % &quot;2.3.4&quot; 然后IDEA会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ssh免密登陆">
-<meta property="og:url" content="http://yoursite.com/2019/03/28/ssh免密登陆/index.html">
+<meta property="og:title" content="akka">
+<meta property="og:url" content="http://yoursite.com/2019/04/01/akka/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="使用ssh登陆远程主机1ssh username@ip 每次登陆的时候都需要输入密码，如果是登陆集群的话输入那么多密码可能会累死，因此可以设置免密登陆。免密登陆的流程如图 ssh免密登陆服务器 首先在master上使用ssh-keygen-trsa命令生成公钥和私钥。1ssh-keygen-trsa   最终得到一个私钥id_rsa和一个公钥id_rsa.pub文件，记得看一下文件路径保存在哪里了">
+<meta property="og:description" content="导入akka使用sbt构建的项目会生成build.sbt文件，添加 123resolvers += &quot;Typesafe Repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;libraryDependencies += &quot;com.typesafe.akka&quot; % &quot;akka-actor_2.11&quot; % &quot;2.3.4&quot; 然后IDEA会">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/005Ue2p9ly1g1ifcll4i2j308z0btmx9.jpg">
-<meta property="og:updated_time" content="2019-03-28T05:33:51.500Z">
+<meta property="og:updated_time" content="2019-04-01T09:36:27.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ssh免密登陆">
-<meta name="twitter:description" content="使用ssh登陆远程主机1ssh username@ip 每次登陆的时候都需要输入密码，如果是登陆集群的话输入那么多密码可能会累死，因此可以设置免密登陆。免密登陆的流程如图 ssh免密登陆服务器 首先在master上使用ssh-keygen-trsa命令生成公钥和私钥。1ssh-keygen-trsa   最终得到一个私钥id_rsa和一个公钥id_rsa.pub文件，记得看一下文件路径保存在哪里了">
-<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/005Ue2p9ly1g1ifcll4i2j308z0btmx9.jpg">
+<meta name="twitter:title" content="akka">
+<meta name="twitter:description" content="导入akka使用sbt构建的项目会生成build.sbt文件，添加 123resolvers += &quot;Typesafe Repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;libraryDependencies += &quot;com.typesafe.akka&quot; % &quot;akka-actor_2.11&quot; % &quot;2.3.4&quot; 然后IDEA会">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/28/ssh免密登陆/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/akka/">
 
 
 
 
 
-  <title>ssh免密登陆 | Hexo</title>
+  <title>akka | Hexo</title>
   
 
 
@@ -234,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/ssh免密登陆/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/01/akka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -251,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ssh免密登陆</h1>
+          <h1 class="post-title" itemprop="name headline">akka</h1>
         
 
         <div class="post-meta">
@@ -263,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T12:49:33+08:00">
-                2019-03-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T14:06:46+08:00">
+                2019-04-01
               </time>
             
 
@@ -301,27 +299,9 @@
       
 
       
-        <p>使用ssh登陆远程主机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@ip</span><br></pre></td></tr></table></figure></p>
-<p>每次登陆的时候都需要输入密码，如果是登陆集群的话输入那么多密码可能会累死，因此可以设置免密登陆。<br>免密登陆的流程如图<br><img src="https://wx3.sinaimg.cn/mw690/005Ue2p9ly1g1ifcll4i2j308z0btmx9.jpg" alt="ssh"></p>
-<h2 id="ssh免密登陆服务器"><a href="#ssh免密登陆服务器" class="headerlink" title="ssh免密登陆服务器"></a>ssh免密登陆服务器</h2><ol>
-<li>首先在master上使用ssh-keygen-trsa命令生成公钥和私钥。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen-trsa</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>最终得到一个私钥id_rsa和一个公钥id_rsa.pub文件，记得看一下文件路径保存在哪里了，都有默认的位置的。</p>
-<ol start="2">
-<li>然后把id_rsa.pub发送到worker上，并追加到authorized_keys文件内，如果没有需要自己手动创建。加入ip地址为192.168.4.101<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp id_rsa.pub worker@192.168.4.101</span><br><span class="line">cat /home/id_rsa.pub &gt;&gt; /worker/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如果有多台电脑，例如搭建集群的时候可以使用pssh进行分发</p>
-<ol start="3">
-<li>这个时候我们登陆已经不需要输入密码了，但是每次还是需要输入ip地址，可以做一个映射，将ip地址映射为主机名，例如有三个worker，ip分别为192.168.4.101,192.168.4.102,192.168.4.103,主机名分别为worker1,worker2,worker3，可以在hosts文件中进行主机名映射，在hosts后添加<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.4.101 worker1</span><br><span class="line">192.168.4.102 worker2</span><br><span class="line">192.168.4.103 worker3</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这样在输入worker1时就会映射到ip地址192.168.4.101上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@worker1</span><br></pre></td></tr></table></figure></p>
-<p>或者直接登陆主机<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh worker1</span><br></pre></td></tr></table></figure></p>
-<ol start="4">
-<li>当然一个主机可以有好几个用户，如果每个用户都进行了ssh的免密登陆，当使用<code>ssh worker1</code>时不知道会登陆到哪一个用户上，还没有试过。</li>
-</ol>
+        <h2 id="导入akka"><a href="#导入akka" class="headerlink" title="导入akka"></a>导入akka</h2><p>使用sbt构建的项目会生成build.sbt文件，添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"</span><br><span class="line"></span><br><span class="line">libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.3.4"</span><br></pre></td></tr></table></figure>
+<p>然后IDEA会自动下载akka的jar包，注意这里不能使用太高版本的scala，否则会报错，使用2.10.<em> 或者2.11.</em> 即可，建议使用2.11.*，因为spark使用的就是2.11。</p>
 
       
     </div>
@@ -346,8 +326,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/28/raspberry编译hadoop2.9.2/" rel="next" title="raspberry编译hadoop">
-                <i class="fa fa-chevron-left"></i> raspberry编译hadoop
+              <a href="/2019/03/29/java接口/" rel="next" title="java接口">
+                <i class="fa fa-chevron-left"></i> java接口
               </a>
             
           </div>
@@ -356,8 +336,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/28/windows右键关联程序/" rel="prev" title="windows右键关联程序">
-                windows右键关联程序 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/10/mysql入门/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -472,7 +452,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh免密登陆服务器"><span class="nav-number">1.</span> <span class="nav-text">ssh免密登陆服务器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入akka"><span class="nav-number">1.</span> <span class="nav-text">导入akka</span></a></li></ol></div>
             
 
           </div>
